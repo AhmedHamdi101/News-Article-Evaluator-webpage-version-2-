@@ -1,20 +1,16 @@
 function checkURL(inputText) {
     let url = inputText;
-    var urlPrototype = new RegExp('^(https?:\\/\\/)?'+
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+
-        '((\\d{1,3}\\.){3}\\d{1,3}))'+
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+
-        '(\\?[;&amp;a-z\\d%_.~+=-]*)?'+
-        '(\\#[-a-z\\d_]*)?$','i');
-
-    if(urlPrototype.test(url))
+    var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
+    var regexp = new RegExp(expression);
+    let x = regexp.test(url)
+    if(x)
     {
-        alert("URL")
+        alert("Hello")
         return true;
     }
     else
     {
-        alert("NOT URL")
+        
         return false;
     }
 }
