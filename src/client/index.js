@@ -12,11 +12,6 @@ import './styles/header.scss'
 export{
     checkURL,
     handleSubmit
-
 }
-// console.log(checkForName);
-// document.getElementById("submitButton").addEventListner("click",handleSubmit);
-
-// alert("I EXIST")
 console.log("CHANGE!!");
 

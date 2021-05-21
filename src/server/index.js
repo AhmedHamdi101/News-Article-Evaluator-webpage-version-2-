@@ -9,8 +9,6 @@ let sample = {
     irony : ''
   }
 
-let serverData = {}
-
 const fetch = require('node-fetch');
 var path = require('path')
 const express = require('express')
@@ -29,7 +27,6 @@ app.use(express.json());
 console.log(__dirname)
 
 app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
     res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
@@ -41,19 +38,18 @@ app.listen(3000, function () {
 app.post('/urlSubmitted',async (request,response) => {
     const data = request.body;
     console.log(data.formText);
-///////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
 
-    console.log(`${baseURL}?key=${process.env.API_KEY}&url=${data.formText}&lang=en`)
+    // console.log(`${baseURL}?key=${process.env.API_KEY}&url=${data.formText}&lang=en`)
     const retData = await getData(`${baseURL}?key=${process.env.API_KEY}&url=${data.formText}&lang=en`)
+
     sample.text = retData.sentence_list[0].text;
     sample.score_tag = retData.score_tag;
     sample.agreement = retData.agreement;
     sample.subjectivity = retData.subjectivity;
     sample.confidence = retData.confidence;
     sample.irony = retData.irony;
-    console.log(sample);
-    
-    response.json(sample);
+    response.json(sample).send()
 
     });
 
@@ -62,7 +58,6 @@ const getData = async ( url = '')=> {
     const request = await fetch(url)
     try {
       const newData = await request.json();
-    //   console.log("new data",newData);
       return newData;
     }catch(error) {
       console.log("ERROR : ", error);
