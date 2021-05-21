@@ -1,4 +1,3 @@
-import { checkForName } from './js/nameChecker'
 import { checkURL } from './js/urlCheck'
 import { handleSubmit } from './js/formHandler'
 

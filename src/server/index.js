@@ -40,7 +40,7 @@ app.post('/urlSubmitted',async (request,response) => {
     console.log(data.formText);
     ///////////////////////////////////////////////////
 
-    // console.log(`${baseURL}?key=${process.env.API_KEY}&url=${data.formText}&lang=en`)
+    console.log(`${baseURL}?key=${process.env.API_KEY}&url=${data.formText}&lang=en`)
     const retData = await getData(`${baseURL}?key=${process.env.API_KEY}&url=${data.formText}&lang=en`)
 
     sample.text = retData.sentence_list[0].text;

@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 async function handleSubmit(event) {
 
     event.preventDefault()
@@ -53,4 +54,4 @@ const getData = async ( url = '')=> {
     }
 }
 
-export { handleSubmit }
+export { handleSubmit,postData,getData }
