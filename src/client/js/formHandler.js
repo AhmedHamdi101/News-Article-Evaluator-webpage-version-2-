@@ -17,18 +17,20 @@ function handleSubmit(event) {
             },
             body: JSON.stringify(data)})
    
+
+
    
-   
-    // fetch('http://localhost:3000/test')
-    // .then(res => res.json())
-    // .then(function(res) {
-    //     document.getElementById('results').innerHTML = res.message
-    // })
+    fetch('http://localhost:3000/test')
+    .then(res => res.json())
+    .then(function(res) {
+        document.getElementById('results').innerHTML = res.message
+    })
     }
     else{
         alert("This is not a URL")
     }
 }
+
 
 
 
