@@ -8,31 +8,38 @@ function handleSubmit(event) {
     {
 
         console.log("::: Form Submitted :::")
-        const data = {formText};
+        let data = {formText};
         //post url to the server
-        fetch('/urlSubmitted',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(data)})
-   
+        postData('/urlSubmitted',data)
+        
 
-
-   
-    fetch('http://localhost:3000/test')
-    .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
-    })
     }
     else{
         alert("This is not a URL")
     }
 }
 
+const postData = async (url = '' , data = {} ) =>{
+    const response = await fetch (url , {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers:{
+            'content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    try{
+        const newData = await response.json();
+        console.log("Post Data:",newData);
 
-
+        // document.getElementById('text').innerHTML == "ossama"
+        //  = newData.body.text;
+        
+        return newData;
+    }catch(error){
+        console.log("ERROR : ",error);
+    }
+}
 
 
 

@@ -38,36 +38,31 @@ app.listen(3000, function () {
     console.log('Example app listening on port 3000!')
 })
 
-app.post('/urlSubmitted',(request,response) => {
+app.post('/urlSubmitted',async (request,response) => {
     const data = request.body;
     console.log(data.formText);
 ///////////////////////////////////////////////////
+
+    console.log(`${baseURL}?key=${process.env.API_KEY}&url=${data.formText}&lang=en`)
+    const retData = await getData(`${baseURL}?key=${process.env.API_KEY}&url=${data.formText}&lang=en`)
+    sample.text = retData.sentence_list[0].text;
+    sample.score_tag = retData.score_tag;
+    sample.agreement = retData.agreement;
+    sample.subjectivity = retData.subjectivity;
+    sample.confidence = retData.confidence;
+    sample.irony = retData.irony;
+    console.log(sample);
     
-    const retData = getData(`${baseURL}?key=${process.env.API_KEY}&url=${data.formText}&lang=en`)
-    .then(function(retData){
-        console.log("new data",retData);
-        sample.text = retData.sentence_list[0];
-        sample.score_tag = retData.sentence_list[5];
-        sample.agreement = retData.sentence_list[6];
-        sample.subjectivity = retData.subjectivity;
-        sample.confidence = retData.sentence_list[4];
-        sample.irony = retData.irony;
-    })
+    response.json(sample);
 
     });
 
-
-
-app.get('/test', function (req, res) {
-    console.log(sample)
-    res.send(sample)
-})
 
 const getData = async ( url = '')=> {
     const request = await fetch(url)
     try {
       const newData = await request.json();
-      console.log("new data",newData);
+    //   console.log("new data",newData);
       return newData;
     }catch(error) {
       console.log("ERROR : ", error);
